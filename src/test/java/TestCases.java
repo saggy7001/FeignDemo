@@ -11,7 +11,14 @@ public class TestCases {
     @Test
     public void GetPet()
     {
-        Pet resp = APIClient.GetClient().petService.GetPet(1);
+        Pet newPet = new Pet(199, new Category(12, "wild"),
+                "dog", Arrays.asList("google.com", "twitter.com"),
+                Arrays.asList(new Tag(1,"A"), new Tag(2,"B")), "sold");
+
+        Pet pet = APIClient.GetClient().petService.CreatePet(newPet);
+        System.out.println(pet.id);
+
+        Pet resp = APIClient.GetClient().petService.GetPet(pet.id);
         System.out.println(resp);
     }
 
@@ -30,6 +37,13 @@ public class TestCases {
     public void TestAuth()
     {
         String resp = APIClient.GetClient().postmanService.TestAuth();
+        System.out.println(resp);
+    }
+
+    @Test
+    public void GetEggCount()
+    {
+        String resp = APIClient.GetClient().iSymfonyCastsService.EggsCount();
         System.out.println(resp);
     }
 }
